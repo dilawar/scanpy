@@ -1,3 +1,5 @@
+import matplotlib
+import matplotlib.colors as mcolors
 from matplotlib import pyplot as pl
 from pandas.api.types import is_categorical_dtype
 import numpy as np
@@ -296,9 +298,15 @@ def plot_scatter(adata,
                             marker=".", c=color_vector, rasterized=settings._vector_friendly,
                             **kwargs)
         else:
+            c = None
+            try:
+                c = mcolors.to_rgba_array(color_vector)
+            except Exception as e:
+                print( '[WARN] Could not set color. Error was %s' % e )
+                pass
             cax= ax.scatter(_data_points[:, 0], _data_points[:, 1],
-                            marker=".", c=color_vector, rasterized=settings._vector_friendly,
-                            **kwargs)
+                            marker=".", c=c, rasterized=settings._vector_friendly, **kwargs)
+
 
         # remove y and x ticks
         ax.set_yticks([])
