@@ -466,7 +466,11 @@ def _paga_graph(
         root = [list(node_labels).index(r) for r in root]
 
     # define the adjacency matrices
-    adjacency_solid = adata.uns['paga'][solid_edges].copy()
+    if solid_edges is not None and solid_edges not in adata.uns['paga']:
+        print( '[WARN] %s not found.' % solid_edges )
+        return
+
+    adjacency_solid = adata.uns['paga'].get[solid_edges].copy()
     if threshold is None:
         threshold = 0.01  # default threshold
     if threshold > 0:
