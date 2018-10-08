@@ -302,7 +302,7 @@ def plot_scatter(adata,
             try:
                 c = mcolors.to_rgba_array(color_vector)
             except Exception as e:
-                print( '[WARN] Could not set color. Error was %s' % e )
+                print( '[WARN] Could not set color due to "%s"' % e )
                 pass
             cax= ax.scatter(_data_points[:, 0], _data_points[:, 1],
                             marker=".", c=c, rasterized=settings._vector_friendly, **kwargs)
