@@ -10,4 +10,4 @@ statsmodels
 networkx
 natsort
 joblib
-numba
+numba==0.39.0
